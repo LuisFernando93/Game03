@@ -41,8 +41,8 @@ public class Start {
 		graphics.setFont(new Font("arial", Font.BOLD, 30));
 		graphics.drawString("Game 03", (Game.WIDTH*Game.SCALE)/2 - 60, (Game.HEIGHT*Game.SCALE)/2 - 60);
 		graphics.setFont(new Font("arial", Font.BOLD, 25));
-		graphics.drawString("Pressione espaço para voar", (Game.WIDTH*Game.SCALE)/2 - 230, (Game.HEIGHT*Game.SCALE)/2 - 10);
-		graphics.drawString("Não bata nas paredes", (Game.WIDTH*Game.SCALE)/2 - 140, (Game.HEIGHT*Game.SCALE)/2 + 30);
+		graphics.drawString("Pressione espaço para voar", (Game.WIDTH*Game.SCALE)/2 - 160, (Game.HEIGHT*Game.SCALE)/2 - 10);
+		graphics.drawString("Não bata nas paredes", (Game.WIDTH*Game.SCALE)/2 - 120, (Game.HEIGHT*Game.SCALE)/2 + 30);
 		if (showMessageStart) {
 			graphics.drawString(">Pressione Enter para começar<", (Game.WIDTH*Game.SCALE)/2 - 180, (Game.HEIGHT*Game.SCALE)/2 + 70);
 		}

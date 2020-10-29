@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import br.com.inarigames.entities.Entity;
 import br.com.inarigames.entities.Player;
 import br.com.inarigames.graphics.Spritesheet;
+import br.com.inarigames.graphics.UI;
 
 public class Game extends Canvas implements Runnable, KeyListener{
 	
@@ -37,16 +38,17 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static List<Entity> toRemove = new ArrayList<Entity>();
 	public static Spritesheet spritesheet =  new Spritesheet("/spritesheet.png");
 	
-	public static final int WIDTH = 480;
-	public static final int HEIGHT = 640;
-	public static final int SCALE = 1;
+	public static final int WIDTH = 320;
+	public static final int HEIGHT = 320;
+	public static final int SCALE = 2;
 	
-	private static String gameState = "NORMAL";
+	private static String gameState = "START";
 	
-	private static int score;
+	private static int score = 0;
 	
 	private Start start;
 	private GameOver gameOver;
+	private UI ui;
 	
 	public Game() {
 		
@@ -57,9 +59,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		//initializing objects
 		image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
-		player = new Player(0, 0, 32, 32);
+		player = new Player(0, 0, 32, 32, Game.spritesheet.getSprite(0, 0, 32, 32));
 		entities.add(player);
 		random = new Random();
+		ui = new UI();
 		start = new Start();
 		gameOver = new GameOver();
 	}
@@ -150,7 +153,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		}
 		
 		Graphics graphics = image.getGraphics();
-		graphics.setColor(new Color(0,0,0));
+		graphics.setColor(new Color(122,102,255));
 		graphics.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		for (Entity entity : entities) {
@@ -160,6 +163,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		graphics.dispose();
 		graphics = bs.getDrawGraphics();
 		graphics.drawImage(image, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
+		ui.render(graphics);
 		
 		switch (Game.gameState) {
 		
