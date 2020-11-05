@@ -9,12 +9,14 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 import javax.swing.JFrame;
 
 import br.com.inarigames.entities.Entity;
+import br.com.inarigames.entities.Obstacle;
 import br.com.inarigames.entities.Player;
 import br.com.inarigames.graphics.Spritesheet;
 import br.com.inarigames.graphics.UI;
@@ -36,6 +38,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	
 	public static Player player;
 	public static List<Entity> entities;
+	public static List<Obstacle> obstacles;
 	public static List<Entity> toRemove = new ArrayList<Entity>();
 	public static Spritesheet spritesheet =  new Spritesheet("/spritesheet.png");
 	
@@ -61,6 +64,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		//initializing objects
 		image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
+		obstacles = new ArrayList<Obstacle>();
 		player = new Player(176, 128, 32, 32, Game.spritesheet.getSprite(0, 0, 32, 32));
 		entities.add(player);
 		random = new Random();
@@ -119,6 +123,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		
 		Game.score = 0;
 		entities.clear();
+		obstacles.clear();
 		player = new Player(176, 128, 32, 32, Game.spritesheet.getSprite(0, 0, 32, 32));
 		entities.add(player);
 		return;
@@ -141,10 +146,12 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		case "NORMAL":
 			
 			obstacleGenerator.update();
+			Collections.sort(entities, Entity.entitySorter);
 			for (Entity entity : entities) {
 				entity.update();
 			}
 			entities.removeAll(toRemove);
+			obstacles.removeAll(toRemove);
 			toRemove.clear();
 			break;
 			

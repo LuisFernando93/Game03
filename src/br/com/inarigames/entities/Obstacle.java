@@ -12,13 +12,23 @@ public class Obstacle extends Entity {
 		super(x, y, width, height, sprite);
 	}
 	
-	public void update() {
+	private void move() {
 		x-=2;
 		if (x+width <= 0) {
 			Game.toRemove.add(this);
 			Game.addScore();
 			return;
 		}
+	}
+	
+	private void updateMask() {
+		this.maskx = this.getX();
+		this.masky = this.getY();
+	}
+	
+	public void update() {
+		move();
+		updateMask();
 	}
 	
 	public void render(Graphics graphics) {

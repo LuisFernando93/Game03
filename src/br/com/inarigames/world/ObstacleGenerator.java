@@ -19,6 +19,8 @@ public class ObstacleGenerator {
 			
 			Game.entities.add(obstaculo1);
 			Game.entities.add(obstaculo2);
+			Game.obstacles.add(obstaculo1);
+			Game.obstacles.add(obstaculo2);
 			time = 0;
 		}
 	}
