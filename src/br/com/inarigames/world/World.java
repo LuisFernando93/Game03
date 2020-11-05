@@ -16,20 +16,8 @@ public class World {
 	private static int WIDTH, HEIGHT;
 	public final static int TILE_SIZE = 32;
 	
-	public World(String path) {
-		createWorld(path);
-	}
-	
 	public static Tile[][] getTiles() {
 		return World.tiles;
-	}
-	
-	public static int getWidth() {
-		return World.WIDTH;
-	}
-	
-	public static int getHeight() {
-		return World.HEIGHT;
 	}
 	
 	public void createWorld(String path) {
@@ -56,7 +44,7 @@ public class World {
 	
 	public static void newWorld(String world) {
 		Game.entities = new ArrayList<Entity>();
-		Game.player = new Player(0, 0, 32, 32, Game.spritesheet.getSprite(0, 0, 32, 32));
+		Game.player = new Player(176, 128, 32, 32, Game.spritesheet.getSprite(0, 0, 32, 32));
 		Game.entities.add(Game.player);
 		return;
 	}

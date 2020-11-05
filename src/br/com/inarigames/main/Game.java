@@ -18,6 +18,7 @@ import br.com.inarigames.entities.Entity;
 import br.com.inarigames.entities.Player;
 import br.com.inarigames.graphics.Spritesheet;
 import br.com.inarigames.graphics.UI;
+import br.com.inarigames.world.ObstacleGenerator;
 
 public class Game extends Canvas implements Runnable, KeyListener{
 	
@@ -38,17 +39,18 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static List<Entity> toRemove = new ArrayList<Entity>();
 	public static Spritesheet spritesheet =  new Spritesheet("/spritesheet.png");
 	
-	public static final int WIDTH = 320;
-	public static final int HEIGHT = 320;
+	public static final int WIDTH = 384;
+	public static final int HEIGHT = 256;
 	public static final int SCALE = 2;
 	
 	private static String gameState = "START";
 	
-	private static int score = 0;
+	private static double score = 0;
 	
 	private Start start;
 	private GameOver gameOver;
 	private UI ui;
+	private ObstacleGenerator obstacleGenerator;
 	
 	public Game() {
 		
@@ -59,16 +61,21 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		//initializing objects
 		image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
-		player = new Player(0, 0, 32, 32, Game.spritesheet.getSprite(0, 0, 32, 32));
+		player = new Player(176, 128, 32, 32, Game.spritesheet.getSprite(0, 0, 32, 32));
 		entities.add(player);
 		random = new Random();
 		ui = new UI();
 		start = new Start();
 		gameOver = new GameOver();
+		obstacleGenerator = new ObstacleGenerator();
 	}
 	
-	public static int getScore() {
+	public static double getScore() {
 		return Game.score;
+	}
+	
+	public static void addScore() {
+		Game.score+=0.5;
 	}
 	
 	public static void setGameState(String gameState) {
@@ -111,6 +118,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static void newGame() {
 		
 		Game.score = 0;
+		entities.clear();
+		player = new Player(176, 128, 32, 32, Game.spritesheet.getSprite(0, 0, 32, 32));
+		entities.add(player);
 		return;
 		
 	}
@@ -129,6 +139,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			break;
 		
 		case "NORMAL":
+			
+			obstacleGenerator.update();
 			for (Entity entity : entities) {
 				entity.update();
 			}
@@ -217,12 +229,20 @@ public class Game extends Canvas implements Runnable, KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+		switch (Game.gameState) {
+			
+			case "NORMAL":
+				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+					player.setFly(true);
+				}
+				break;
+				
+			}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-	switch (Game.gameState) {
+		switch (Game.gameState) {
 			
 			case "START":
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -232,7 +252,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			
 			case "NORMAL":
 				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-					
+					player.setFly(false);
 				}
 				break;
 			

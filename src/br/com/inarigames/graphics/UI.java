@@ -13,7 +13,7 @@ public class UI {
 		
 		graphics.setColor(Color.white);
 		graphics.setFont(new Font("arial", Font.BOLD, 18));
-		String score = "Score: " + Game.getScore();
+		String score = "Score: " + (int)Game.getScore();
 		graphics.drawString(score, 30, 30);
 		
 	}
