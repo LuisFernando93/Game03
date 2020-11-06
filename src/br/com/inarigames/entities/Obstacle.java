@@ -32,7 +32,12 @@ public class Obstacle extends Entity {
 	}
 	
 	public void render(Graphics graphics) {
-		graphics.setColor(Color.green);
-		graphics.fillRect(this.getX(), this.getY(), width, height);
+		if (sprite == null) {
+			graphics.setColor(Color.green);
+			graphics.fillRect(this.getX(), this.getY(), width, height);
+		} else {
+			graphics.drawImage(sprite, this.getX(), this.getY(), this.getWidth(), this.getHeight(), null);
+		}
+		
 	}
 }

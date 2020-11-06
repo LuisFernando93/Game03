@@ -12,10 +12,10 @@ public class ObstacleGenerator {
 		time++;
 		if (time == targetTime) {
 			int altura1 = Game.random.nextInt(100 - 40) + 40;
-			Obstacle obstaculo1 = new Obstacle(Game.WIDTH, 0, 32, altura1, null);
+			Obstacle obstaculo1 = new Obstacle(Game.WIDTH, 0, 32, altura1, Game.spritesheet.getSprite(3*32, 0, 32, 32));
 			
 			int altura2 = Game.random.nextInt(100 - 40) + 40;
-			Obstacle obstaculo2 = new Obstacle(Game.WIDTH, Game.HEIGHT - altura2, 32, altura2, null);
+			Obstacle obstaculo2 = new Obstacle(Game.WIDTH, Game.HEIGHT - altura2, 32, altura2, Game.spritesheet.getSprite(3*32, 32, 32, 32));
 			
 			Game.entities.add(obstaculo1);
 			Game.entities.add(obstaculo2);

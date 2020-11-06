@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import br.com.inarigames.main.Game;
-import br.com.inarigames.world.Camera;
 
 public class Player extends Entity {
 	
@@ -67,7 +66,6 @@ public class Player extends Entity {
 	private void checkCollission() {
 		for (Obstacle obstacle : Game.obstacles) {
 			if(isColliding(obstacle, this)) {
-				Game.toRemove.add(this);
 				Game.setGameState("GAME OVER");
 			}
 		}
@@ -82,7 +80,7 @@ public class Player extends Entity {
 	}
 	
 	public void render(Graphics graphics) {
-		graphics.drawImage(playerSprites[imageIndex], Camera.offsetX(this.getX()), Camera.offsetY(this.getY()), null);
+		graphics.drawImage(playerSprites[imageIndex], this.getX(), this.getY(), null);
 	}
 	
 }

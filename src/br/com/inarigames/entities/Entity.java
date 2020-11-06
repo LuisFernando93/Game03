@@ -5,8 +5,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Comparator;
 
-import br.com.inarigames.world.Camera;
-
 public class Entity {
 	
 	protected double x, y;
@@ -14,6 +12,7 @@ public class Entity {
 	protected int width, height;
 	protected int maskx, masky, maskw, maskh;
 	protected int depth;
+	
 	
 	public static Comparator<Entity> entitySorter = new Comparator<Entity>() {
 			
@@ -82,6 +81,6 @@ public class Entity {
 	}
 	
 	public void render(Graphics graphics) {
-		graphics.drawImage(sprite, Camera.offsetX(this.getX()), Camera.offsetY(this.getY()), null);
+		graphics.drawImage(sprite, this.getX(), this.getY(), null);
 	}
 }
